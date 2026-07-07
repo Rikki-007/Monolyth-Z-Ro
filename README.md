@@ -2,7 +2,7 @@
 
 Personal portfolio for Priyanshu Malik — software, web and app engineering, and graphic design.
 
-**Live site:** https://Rikki-007.github.io/portfolio/
+**Live site:** https://Rikki-007.github.io/Monolyth-Z-Ro/
 
 Built with Next.js (static export), Tailwind CSS, and Framer Motion.
 
