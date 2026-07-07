@@ -1,14 +1,34 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail } from "lucide-react";
-import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/icons/BrandIcons";
+import { Mail, Phone } from "lucide-react";
+import {
+  GithubIcon,
+  LinkedinIcon,
+  InstagramIcon,
+  FacebookIcon,
+  WhatsappIcon,
+} from "@/components/icons/BrandIcons";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 
 const socials = [
   { icon: GithubIcon, label: "GitHub", href: "https://github.com/Rikki-007" },
   { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com/" },
-  { icon: InstagramIcon, label: "Instagram", href: "https://instagram.com/" },
+  {
+    icon: InstagramIcon,
+    label: "Instagram",
+    href: "https://www.instagram.com/monolyth_zro?igsh=d2NocDhsdXhiYTZ1&utm_source=qr",
+  },
+  {
+    icon: FacebookIcon,
+    label: "Facebook",
+    href: "https://www.facebook.com/share/19567ukrr5/?mibextid=wwXIfr",
+  },
+  {
+    icon: WhatsappIcon,
+    label: "WhatsApp",
+    href: "https://wa.me/353899698237",
+  },
 ];
 
 export default function Contact() {
@@ -49,11 +69,21 @@ export default function Contact() {
           <motion.a
             variants={fadeUp}
             data-cursor-hover
-            href="mailto:malikpriyanshu2502@gmail.com"
+            href="mailto:malikpriyanshu250208@gmail.com"
             className="border-beam glow-cyan mt-4 flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan"
           >
             <Mail size={18} />
-            malikpriyanshu2502@gmail.com
+            malikpriyanshu250208@gmail.com
+          </motion.a>
+
+          <motion.a
+            variants={fadeUp}
+            data-cursor-hover
+            href="tel:+353896139970"
+            className="border-beam glow-cyan flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan"
+          >
+            <Phone size={18} />
+            +353 0896139970
           </motion.a>
 
           <motion.div variants={fadeUp} className="mt-8 flex gap-6">
