@@ -25,9 +25,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Priyanshu Malik — Design × Engineering",
+  title: "MONOLYTH Z-RO — Design | Engineering | Software",
   description:
-    "Portfolio of Priyanshu Malik — graphic designer and software / web / app engineer.",
+    "MONOLYTH Z-RO — a design, engineering, and software studio.",
 };
 
 export default function RootLayout({

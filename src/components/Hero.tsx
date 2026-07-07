@@ -69,7 +69,7 @@ export default function Hero() {
             variants={fadeUp}
             className="font-mono text-xs uppercase tracking-[0.4em] text-fog"
           >
-            Portfolio — 2026 Edition
+            DESIGN | ENGINEERING | SOFTWARE
           </motion.span>
 
           <div className="relative flex flex-col items-center leading-none">
@@ -93,7 +93,7 @@ export default function Hero() {
             variants={fadeUp}
             className="max-w-xl text-balance font-sans text-sm text-fog sm:text-base"
           >
-            Priyanshu Malik — building interfaces and the systems underneath
+            MONOLYTH Z-RO — building interfaces and the systems underneath
             them. Graphic design instincts, software engineering discipline.
           </motion.p>
 

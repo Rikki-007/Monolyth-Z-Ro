@@ -95,7 +95,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
             animate="show"
             className="absolute bottom-10 flex w-full items-center justify-between px-8 font-mono text-xs text-fog sm:px-14"
           >
-            <span>PRIYANSHU MALIK</span>
+            <span>MONOLYTH Z-RO</span>
             <span className="text-amber">{percent.toString().padStart(3, "0")}%</span>
             <span>SYSTEM.INIT</span>
           </motion.div>

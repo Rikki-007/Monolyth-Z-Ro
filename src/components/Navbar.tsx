@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cinematicEase } from "@/lib/motion";
+import { Wordmark } from "@/components/icons/MonolythMark";
 
 const links = [
   { label: "About", href: "#about" },
@@ -18,12 +19,8 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
       <nav className="glass mx-auto mt-4 flex w-[92%] max-w-6xl items-center justify-between rounded-full px-6 py-3 sm:w-[88%]">
-        <a
-          href="#top"
-          data-cursor-hover
-          className="font-display text-xl tracking-wide text-paper"
-        >
-          P<span className="text-cyan text-glow-cyan">.</span>M
+        <a href="#top" data-cursor-hover aria-label="MONOLYTH Z-RO — home">
+          <Wordmark iconSize={24} textClassName="text-base sm:text-lg" />
         </a>
 
         <ul className="hidden items-center gap-8 font-mono text-xs uppercase tracking-widest text-fog md:flex">
