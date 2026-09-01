@@ -1,6 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+} from "framer-motion";
 import { ArrowUpRight, Clock } from "lucide-react";
 import { GithubIcon } from "@/components/icons/BrandIcons";
 import type { ProjectEntry } from "@/data/projects";
@@ -35,6 +41,27 @@ export default function ProjectCard({
   const accent = accentClasses[categoryAccent[project.category]];
   const sizeClass = tall ? "row-span-2 min-h-[22rem]" : "min-h-[16rem]";
 
+  const cardRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springRotateX = useSpring(rotateX, { stiffness: 220, damping: 22 });
+  const springRotateY = useSpring(rotateY, { stiffness: 220, damping: 22 });
+
+  const handleTiltMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (prefersReducedMotion || !cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width - 0.5;
+    const py = (e.clientY - rect.top) / rect.height - 0.5;
+    rotateY.set(px * 7);
+    rotateX.set(-py * 7);
+  };
+
+  const handleTiltLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
   if (project.comingSoon) {
     return (
       <motion.div
@@ -66,7 +93,15 @@ export default function ProjectCard({
   return (
     <motion.div
       {...cardMotion}
-      className={`group border-beam glass relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 transition-colors duration-300 hover:bg-concrete-light/60 ${sizeClass}`}
+      ref={cardRef}
+      onMouseMove={handleTiltMove}
+      onMouseLeave={handleTiltLeave}
+      style={{
+        rotateX: springRotateX,
+        rotateY: springRotateY,
+        transformPerspective: 800,
+      }}
+      className={`group border-beam glass-premium relative flex flex-col justify-between overflow-hidden rounded-3xl p-6 transition-colors duration-300 hover:bg-concrete-light/40 ${sizeClass}`}
     >
       <div className="flex items-start justify-between">
         <span
@@ -89,7 +124,7 @@ export default function ProjectCard({
           <a
             href={project.liveUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             data-cursor-hover
             className="inline-flex items-center gap-1.5 text-cyan transition-colors duration-300 hover:text-paper"
           >
@@ -99,7 +134,7 @@ export default function ProjectCard({
           <a
             href={project.githubUrl}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             data-cursor-hover
             className="inline-flex items-center gap-1.5 text-fog transition-colors duration-300 hover:text-paper"
           >

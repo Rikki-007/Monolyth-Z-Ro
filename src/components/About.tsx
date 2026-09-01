@@ -78,7 +78,7 @@ export default function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, transition: { duration: 1 } }}
             viewport={{ once: true, amount: 0.3 }}
-            className="glass border-beam rounded-3xl p-8 [transform:translateZ(0)]"
+            className="glass-premium border-beam rounded-3xl p-8 [transform:translateZ(0)]"
           >
             <h3 className="font-display text-3xl text-crimson text-glow-crimson">
               Designer
@@ -106,7 +106,7 @@ export default function About() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, transition: { duration: 1 } }}
             viewport={{ once: true, amount: 0.3 }}
-            className="glass border-beam rounded-3xl p-8 [transform:translateZ(0)]"
+            className="glass-premium border-beam rounded-3xl p-8 [transform:translateZ(0)]"
           >
             <h3 className="font-display text-3xl text-cyan text-glow-cyan">
               Engineer

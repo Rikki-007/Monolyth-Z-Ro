@@ -3,6 +3,7 @@ import { Bebas_Neue, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import NoiseOverlay from "@/components/NoiseOverlay";
 import GridOverlay from "@/components/GridOverlay";
+import Background3DLoader from "@/components/Background3DLoader";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 
@@ -42,6 +43,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-obsidian text-paper">
         <GridOverlay />
+        <Background3DLoader />
         <NoiseOverlay />
         <CustomCursor />
         <ScrollProgress />

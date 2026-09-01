@@ -12,6 +12,7 @@ import {
 } from "@/components/icons/BrandIcons";
 import { Wordmark } from "@/components/icons/MonolythMark";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import MagneticButton from "@/components/MagneticButton";
 
 const email = "monolythzro@gmail.com";
 
@@ -86,28 +87,28 @@ export default function Contact() {
             spanning design and engineering.
           </motion.p>
 
-          <motion.a
-            variants={fadeUp}
-            data-cursor-hover
-            href={`mailto:${email}`}
-            onClick={handleEmailClick}
-            aria-label={`Send an email to ${email}`}
-            className="glass mt-4 flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
-          >
-            {copied ? <Check size={18} /> : <Mail size={18} />}
-            {copied ? "Copied — paste into your mail app" : email}
-          </motion.a>
+          <motion.div variants={fadeUp} className="mt-4">
+            <MagneticButton
+              href={`mailto:${email}`}
+              onClick={handleEmailClick}
+              aria-label={`Send an email to ${email}`}
+              className="glass-premium flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm tracking-widest text-cyan transition-all duration-300 hover:border-violet/40 hover:glow-violet"
+            >
+              {copied ? <Check size={18} /> : <Mail size={18} />}
+              {copied ? "Copied — paste into your mail app" : email}
+            </MagneticButton>
+          </motion.div>
 
-          <motion.a
-            variants={fadeUp}
-            data-cursor-hover
-            href="tel:+353896139970"
-            aria-label="Call +353 0896139970"
-            className="glass flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
-          >
-            <Phone size={18} />
-            +353 0896139970
-          </motion.a>
+          <motion.div variants={fadeUp}>
+            <MagneticButton
+              href="tel:+353896139970"
+              aria-label="Call +353 0896139970"
+              className="glass flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
+            >
+              <Phone size={18} />
+              +353 0896139970
+            </MagneticButton>
+          </motion.div>
 
           <motion.div variants={fadeUp} className="mt-8 flex gap-6">
             {socials.map(({ icon: Icon, label, href }) => (

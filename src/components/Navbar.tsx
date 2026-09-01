@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cinematicEase } from "@/lib/motion";
 import { Wordmark } from "@/components/icons/MonolythMark";
+import MagneticButton from "@/components/MagneticButton";
 
 const links = [
   { label: "About", href: "#about" },
@@ -18,7 +19,7 @@ export default function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-40">
-      <nav className="glass mx-auto mt-4 flex w-[92%] max-w-6xl items-center justify-between rounded-full px-6 py-3 sm:w-[88%]">
+      <nav className="glass-premium mx-auto mt-4 flex w-[92%] max-w-6xl items-center justify-between rounded-full px-6 py-3 sm:w-[88%]">
         <a href="#top" data-cursor-hover aria-label="MONOLYTH Z-RO — home">
           <Wordmark iconSize={24} textClassName="text-base sm:text-lg" />
         </a>
@@ -37,13 +38,13 @@ export default function Navbar() {
           ))}
         </ul>
 
-        <a
+        <MagneticButton
           href="#contact"
-          data-cursor-hover
+          strength={7}
           className="border-beam hidden rounded-full px-5 py-2 font-mono text-xs uppercase tracking-widest text-cyan md:block"
         >
           Let&apos;s Talk
-        </a>
+        </MagneticButton>
 
         <button
           type="button"

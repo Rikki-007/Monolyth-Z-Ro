@@ -155,7 +155,7 @@ export default function Lab() {
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }}
           viewport={{ once: true, amount: 0.2 }}
-          className="glass border-beam overflow-hidden rounded-3xl"
+          className="glass-premium border-beam overflow-hidden rounded-3xl"
         >
           <div className="relative h-[420px] w-full [transform:translateZ(0)]">
             <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />

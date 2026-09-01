@@ -9,6 +9,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { fadeUp, staggerContainer, cinematicEase } from "@/lib/motion";
+import MagneticButton from "@/components/MagneticButton";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -98,20 +99,18 @@ export default function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-4 flex gap-4">
-            <a
+            <MagneticButton
               href="#projects"
-              data-cursor-hover
-              className="border-beam rounded-full px-6 py-3 font-mono text-xs uppercase tracking-widest text-amber"
+              className="border-beam rounded-full px-6 py-3 font-mono text-xs uppercase tracking-widest text-amber transition-colors duration-300 hover:text-paper"
             >
               View Work
-            </a>
-            <a
+            </MagneticButton>
+            <MagneticButton
               href="#contact"
-              data-cursor-hover
-              className="glass rounded-full px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper"
+              className="glass-premium rounded-full px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors duration-300 hover:text-violet"
             >
               Get In Touch
-            </a>
+            </MagneticButton>
           </motion.div>
         </motion.div>
       </motion.div>
