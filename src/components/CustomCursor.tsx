@@ -32,6 +32,23 @@ export default function CustomCursor() {
 
     document.body.classList.add("custom-cursor-active");
 
+    // Scrolling moves page content under a stationary cursor, which fires
+    // real `mouseover`/`mouseout` events for every element boundary that
+    // sweeps past it — with nothing to do with the user actually pointing
+    // at something. Each one that flips hover state re-triggers the scale
+    // spring below, so a fast scroll over a content-dense section could
+    // thrash that animation many times in a row. Track "is a scroll in
+    // progress" and skip hover updates while it's true.
+    let isScrolling = false;
+    let scrollTimeout: ReturnType<typeof setTimeout> | undefined;
+    const handleScroll = () => {
+      isScrolling = true;
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 150);
+    };
+
     const move = (e: MouseEvent) => {
       x.set(e.clientX);
       y.set(e.clientY);
@@ -39,6 +56,7 @@ export default function CustomCursor() {
     };
 
     const over = (e: MouseEvent) => {
+      if (isScrolling) return;
       const target = e.target as HTMLElement;
       setHovering(Boolean(target.closest("a, button, [data-cursor-hover]")));
     };
@@ -47,13 +65,16 @@ export default function CustomCursor() {
 
     window.addEventListener("mousemove", move);
     window.addEventListener("mouseover", over);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     document.documentElement.addEventListener("mouseleave", leave);
 
     return () => {
       document.body.classList.remove("custom-cursor-active");
       window.removeEventListener("mousemove", move);
       window.removeEventListener("mouseover", over);
+      window.removeEventListener("scroll", handleScroll);
       document.documentElement.removeEventListener("mouseleave", leave);
+      clearTimeout(scrollTimeout);
     };
   }, [enabled, x, y]);
 

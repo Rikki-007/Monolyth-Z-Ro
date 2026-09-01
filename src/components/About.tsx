@@ -42,10 +42,16 @@ export default function About() {
       ref={sectionRef}
       className="section-anchor relative overflow-hidden py-32"
     >
+      {/* blur-[80px], not the original 140px: this glow moves continuously
+          via scroll-linked `y` for the whole time this section is in view,
+          so the browser has to keep a much larger filtered/composited
+          buffer around than the element's own footprint (roughly
+          proportional to the blur radius) alive and repositioned on every
+          scroll tick. At 10% opacity the softer blur reads the same. */}
       <motion.div
         style={{ y: orbY }}
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/3 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-cyan/10 blur-[140px] [transform:translateZ(0)]"
+        className="pointer-events-none absolute left-1/2 top-1/3 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-cyan/10 blur-[80px] [transform:translateZ(0)]"
       />
 
       <div className="relative mx-auto max-w-6xl px-6">

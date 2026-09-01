@@ -166,6 +166,13 @@ body {
 .border-beam {
   position: relative;
   isolation: isolate;
+  /* The ::before below repaints continuously (its background is a rotating
+     conic-gradient, which isn't a compositor-only property like transform/
+     opacity) — up to ~7 of these can be on screen at once as cards scroll
+     into view. `contain: paint` tells the browser that repaint never needs
+     to escape this box, so each one stays a strictly local cost instead of
+     risking wider invalidation. */
+  contain: paint;
 }
 
 .border-beam::before {

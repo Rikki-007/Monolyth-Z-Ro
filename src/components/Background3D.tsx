@@ -94,11 +94,21 @@ function Scene({ count }: { count: number }) {
       pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
       pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
     };
+
+    // requestAnimationFrame-coalesced: native scroll events can fire faster
+    // than the display refresh rate, and this value is only ever read once
+    // per rendered frame anyway (in useFrame below), so there's no reason
+    // to redo this arithmetic more often than that.
+    let scrollRaf = 0;
     const handleScroll = () => {
-      const y = window.scrollY;
-      // Clamp so a fast fling doesn't fling the scene with it.
-      scrollVelocity.current = Math.max(-40, Math.min(40, y - lastScrollY.current));
-      lastScrollY.current = y;
+      if (scrollRaf) return;
+      scrollRaf = requestAnimationFrame(() => {
+        scrollRaf = 0;
+        const y = window.scrollY;
+        // Clamp so a fast fling doesn't fling the scene with it.
+        scrollVelocity.current = Math.max(-40, Math.min(40, y - lastScrollY.current));
+        lastScrollY.current = y;
+      });
     };
 
     window.addEventListener("pointermove", handlePointerMove, { passive: true });
@@ -106,6 +116,7 @@ function Scene({ count }: { count: number }) {
     return () => {
       window.removeEventListener("pointermove", handlePointerMove);
       window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(scrollRaf);
     };
   }, []);
 
