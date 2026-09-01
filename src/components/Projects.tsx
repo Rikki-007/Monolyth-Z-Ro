@@ -20,7 +20,9 @@ export default function Projects() {
   const filtered = useMemo(
     () =>
       active === "All"
-        ? projects
+        // The default view only shows shipped work — "coming soon"
+        // placeholders stay tucked behind their category filter below.
+        ? projects.filter((project) => !project.comingSoon)
         : projects.filter((project) => project.category === active),
     [active]
   );
