@@ -12,8 +12,7 @@ import {
 import { Wordmark } from "@/components/icons/MonolythMark";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 
-const email = "malikpriyanshu250208@gmail.com";
-const gmailComposeHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}`;
+const email = "monolythzro@gmail.com";
 
 const socials = [
   { icon: GithubIcon, label: "GitHub", href: "https://github.com/Rikki-007" },
@@ -77,11 +76,9 @@ export default function Contact() {
           <motion.a
             variants={fadeUp}
             data-cursor-hover
-            href={gmailComposeHref}
-            target="_blank"
-            rel="noreferrer"
-            aria-label={`Email ${email} via Gmail`}
-            className="border-beam glow-cyan mt-4 flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm tracking-widest text-cyan"
+            href={`mailto:${email}`}
+            aria-label={`Send an email to ${email}`}
+            className="glass mt-4 flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
           >
             <Mail size={18} />
             {email}
@@ -91,7 +88,8 @@ export default function Contact() {
             variants={fadeUp}
             data-cursor-hover
             href="tel:+353896139970"
-            className="border-beam glow-cyan flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan"
+            aria-label="Call +353 0896139970"
+            className="glass flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
           >
             <Phone size={18} />
             +353 0896139970
@@ -103,10 +101,11 @@ export default function Contact() {
                 key={label}
                 href={href}
                 target="_blank"
-                rel="noreferrer"
-                aria-label={label}
+                rel="noopener noreferrer"
+                aria-label={`${label} (opens in a new tab)`}
+                title={label}
                 data-cursor-hover
-                className="glass flex h-11 w-11 items-center justify-center rounded-full text-fog transition-colors duration-300 hover:text-cyan"
+                className="glass flex h-11 w-11 items-center justify-center rounded-full border border-concrete-line text-fog transition-all duration-300 hover:border-cyan/50 hover:text-cyan hover:glow-cyan"
               >
                 <Icon size={18} />
               </a>
