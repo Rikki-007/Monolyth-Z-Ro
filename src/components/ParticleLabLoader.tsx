@@ -5,6 +5,7 @@ import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { Gauge, Atom, Waves, Maximize2 } from "lucide-react";
 import { particlePresets, type ParticleParams } from "@/lib/particlePresets";
+import CanvasErrorBoundary from "@/components/CanvasErrorBoundary";
 
 // Same reasoning as Background3DLoader: keep the three.js/R3F bundle out of
 // the initial page load and off the server render entirely.
@@ -48,7 +49,16 @@ export default function ParticleLabLoader() {
   return (
     <div className="flex flex-col">
       <div className="relative h-[420px] w-full [transform:translateZ(0)]">
-        <ParticleLab presetId={presetId} params={params} />
+        <CanvasErrorBoundary
+          fallback={
+            <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-6 text-center font-mono text-xs uppercase tracking-widest text-fog">
+              <span>3D preview unavailable in this browser</span>
+              <span className="text-fog/60">(WebGL failed to initialize)</span>
+            </div>
+          }
+        >
+          <ParticleLab presetId={presetId} params={params} />
+        </CanvasErrorBoundary>
       </div>
 
       <div className="border-t border-concrete-line p-6">
@@ -58,6 +68,7 @@ export default function ParticleLabLoader() {
               key={preset.id}
               type="button"
               data-cursor-hover
+              aria-pressed={presetId === preset.id}
               onClick={() => setPresetId(preset.id)}
               className={`relative rounded-full px-4 py-2 transition-colors duration-300 ${
                 presetId === preset.id ? "text-obsidian" : "text-fog hover:text-paper"

@@ -61,6 +61,7 @@ export default function Projects() {
                 key={filter}
                 type="button"
                 data-cursor-hover
+                aria-pressed={active === filter}
                 onClick={() => setActive(filter)}
                 className={`relative rounded-full px-4 py-2 transition-colors duration-300 ${
                   active === filter

@@ -33,6 +33,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     const start = performance.now();
     const duration = 1800;
     let raf: number;
+    let exitTimer: ReturnType<typeof setTimeout> | undefined;
 
     const tick = (now: number) => {
       const progress = Math.min((now - start) / duration, 1);
@@ -40,13 +41,15 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
       if (progress < 1) {
         raf = requestAnimationFrame(tick);
       } else {
-        const exitTimer = setTimeout(() => setDone(true), 500);
-        return () => clearTimeout(exitTimer);
+        exitTimer = setTimeout(() => setDone(true), 500);
       }
     };
 
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    return () => {
+      cancelAnimationFrame(raf);
+      clearTimeout(exitTimer);
+    };
   }, []);
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { EffectComposer, Bloom } from "@react-three/postprocessing";
+import { useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 import { particlePresets, type ParticleParams } from "@/lib/particlePresets";
 
@@ -84,18 +85,33 @@ export default function ParticleLab({
   );
   const [active, setActive] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
 
-    const io = new IntersectionObserver(([entry]) => setActive(entry.isIntersecting), {
-      threshold: 0.1,
-    });
+    // Two independent gates — scrolled into view, and the tab not
+    // backgrounded — combined into one `active` flag. Tracking both as
+    // refs (rather than deriving from two separate state variables) means
+    // either listener can flip the combined flag without going stale
+    // relative to the other signal.
+    let isIntersecting = true;
+    let isTabVisible = document.visibilityState === "visible";
+    const updateActive = () => setActive(isIntersecting && isTabVisible);
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        updateActive();
+      },
+      { threshold: 0.1 }
+    );
     io.observe(el);
 
     const handleVisibility = () => {
-      if (document.visibilityState !== "visible") setActive(false);
+      isTabVisible = document.visibilityState === "visible";
+      updateActive();
     };
     document.addEventListener("visibilitychange", handleVisibility);
 
@@ -104,10 +120,6 @@ export default function ParticleLab({
       document.removeEventListener("visibilitychange", handleVisibility);
     };
   }, []);
-
-  const prefersReducedMotion =
-    typeof window !== "undefined" &&
-    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   return (
     <div ref={containerRef} className="h-full w-full">
@@ -126,6 +138,10 @@ export default function ParticleLab({
           enablePan={false}
           autoRotate={!prefersReducedMotion}
           autoRotateSpeed={0.4}
+          // A single finger must still scroll the page over this canvas —
+          // only two-finger drag orbits on touch. (Mouse drag is untouched;
+          // this only affects the `touches` gesture map.)
+          touches={{ ONE: undefined, TWO: THREE.TOUCH.ROTATE }}
         />
         <EffectComposer>
           <Bloom luminanceThreshold={0.15} luminanceSmoothing={0.9} intensity={1.3} mipmapBlur />
