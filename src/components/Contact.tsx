@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone } from "lucide-react";
+import { Check, Mail, Phone } from "lucide-react";
 import {
   GithubIcon,
   LinkedinIcon,
@@ -35,6 +36,18 @@ const socials = [
 ];
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const handleEmailClick = () => {
+    // mailto: only does something visible if the visitor has a default mail
+    // app configured — plenty of people don't, and then the button looks
+    // completely dead. Copy the address as a fallback + give on-screen
+    // confirmation either way, without blocking the normal mailto: handoff.
+    navigator.clipboard?.writeText(email).catch(() => {});
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 2000);
+  };
+
   return (
     <section id="contact" className="section-anchor relative py-32">
       <div className="mx-auto max-w-4xl px-6 text-center">
@@ -77,11 +90,12 @@ export default function Contact() {
             variants={fadeUp}
             data-cursor-hover
             href={`mailto:${email}`}
+            onClick={handleEmailClick}
             aria-label={`Send an email to ${email}`}
             className="glass mt-4 flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
           >
-            <Mail size={18} />
-            {email}
+            {copied ? <Check size={18} /> : <Mail size={18} />}
+            {copied ? "Copied — paste into your mail app" : email}
           </motion.a>
 
           <motion.a
