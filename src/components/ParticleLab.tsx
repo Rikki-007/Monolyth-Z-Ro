@@ -80,8 +80,12 @@ export default function ParticleLab({
   presetId: string;
   params: ParticleParams;
 }) {
+  // Trimmed down from the initial 2500/5000/9000: this scene's per-particle
+  // CPU loop plus Bloom's extra render passes run at the same time the
+  // always-on Background3D canvas is compositing behind it, so scrolling
+  // through this section was the single heaviest moment on the page.
   const [count] = useState(() =>
-    window.innerWidth < 640 ? 2500 : window.innerWidth < 1024 ? 5000 : 9000
+    window.innerWidth < 640 ? 1800 : window.innerWidth < 1024 ? 3500 : 6000
   );
   const [active, setActive] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);

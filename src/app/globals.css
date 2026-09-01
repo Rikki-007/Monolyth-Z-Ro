@@ -99,7 +99,12 @@ body {
 /* ---------- Glass + glow utilities ---------- */
 
 .glass {
-  @apply backdrop-blur-xl;
+  /* backdrop-blur-lg (16px), not -xl (24px): every one of these surfaces
+     sits over the always-animating 3D background, so its blur has to be
+     resampled on every composited frame — a lighter radius meaningfully
+     cuts that cost (there are ~10 of these on screen at once between the
+     navbar, cards, and buttons) without reading as noticeably less "glass." */
+  @apply backdrop-blur-lg;
   background: rgba(16, 17, 20, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -109,7 +114,7 @@ body {
    (upgraded cards, primary CTAs). Layers on top of .border-beam, doesn't
    replace it. */
 .glass-premium {
-  @apply backdrop-blur-xl;
+  @apply backdrop-blur-lg;
   background: linear-gradient(
     155deg,
     rgba(26, 27, 31, 0.72) 0%,

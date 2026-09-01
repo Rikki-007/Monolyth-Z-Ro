@@ -133,7 +133,7 @@ function Scene({ count }: { count: number }) {
 export default function Background3D() {
   const [frameloop, setFrameloop] = useState<"always" | "never">("always");
   const [count] = useState(() =>
-    window.innerWidth < 640 ? 70 : window.innerWidth < 1024 ? 150 : 240
+    window.innerWidth < 640 ? 50 : window.innerWidth < 1024 ? 100 : 180
   );
 
   useEffect(() => {
@@ -150,7 +150,12 @@ export default function Background3D() {
     <div className="pointer-events-none fixed inset-0 z-[1]" aria-hidden="true">
       <Canvas
         dpr={[1, window.innerWidth < 768 ? 1 : 1.5]}
-        gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+        // No MSAA here: this canvas runs continuously behind every glass
+        // surface on the site (each of which re-samples it every composited
+        // frame via backdrop-filter), so it's the one scene where render
+        // cost matters most. Points and thin wireframe lines barely benefit
+        // from antialiasing anyway.
+        gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
         camera={{ position: [0, 0, 6], fov: 50 }}
         frameloop={frameloop}
       >
