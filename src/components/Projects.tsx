@@ -4,7 +4,8 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { projects, type Category } from "@/data/projects";
 import ProjectCard from "./ProjectCard";
-import { fadeUp, staggerContainer } from "@/lib/motion";
+import { fadeUp } from "@/lib/motion";
+import PageHeader from "@/components/PageHeader";
 
 const filters: Array<Category | "All"> = [
   "All",
@@ -28,32 +29,21 @@ export default function Projects() {
   );
 
   return (
-    <section id="projects" className="section-anchor relative py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <motion.div
-          variants={staggerContainer()}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
-          className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between"
-        >
-          <div>
-            <motion.span
-              variants={fadeUp}
-              className="font-mono text-xs uppercase tracking-[0.4em] text-amber"
-            >
-              02 / Work
-            </motion.span>
-            <motion.h2
-              variants={fadeUp}
-              className="mt-4 font-display text-5xl text-paper sm:text-7xl"
-            >
-              Selected Projects
-            </motion.h2>
-          </div>
+    <section className="relative px-6 pt-40 pb-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <PageHeader
+            index="02"
+            label="Work"
+            title="Selected Projects"
+            description="A mix of shipped client sites and self-directed builds — spanning marketing sites, data-driven tools, and full product interfaces."
+          />
 
           <motion.div
             variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.4 }}
             className="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-widest"
           >
             {filters.map((filter) => (
@@ -80,7 +70,7 @@ export default function Projects() {
               </button>
             ))}
           </motion.div>
-        </motion.div>
+        </div>
 
         <motion.div
           layout

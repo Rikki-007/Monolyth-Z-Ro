@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import {
   motion,
   useMotionValue,
@@ -9,20 +10,28 @@ import {
   type HTMLMotionProps,
 } from "framer-motion";
 
+const MotionLink = motion.create(Link);
+
 type MagneticButtonProps = HTMLMotionProps<"a"> & {
   /** Max pull toward the cursor, in px. Keep small — this is a hint, not a lurch. */
   strength?: number;
+  href: string;
 };
 
 /**
  * A CTA anchor that leans a few px toward the cursor while hovered, then
  * springs back on leave. Pure transform-based (GPU-friendly), and backs off
  * to a plain static link when the visitor has requested reduced motion.
+ *
+ * Internal routes (`href` starting with "/") render through next/link so
+ * navigation stays client-side and plays the route transition; anything
+ * else (mailto:, tel:, http(s):, #hash) renders as a plain anchor.
  */
 export default function MagneticButton({
   strength = 10,
   className,
   children,
+  href,
   onMouseMove,
   onMouseLeave,
   ...props
@@ -50,9 +59,13 @@ export default function MagneticButton({
     onMouseLeave?.(e);
   };
 
+  const isInternal = href.startsWith("/");
+  const Component = isInternal ? MotionLink : motion.a;
+
   return (
-    <motion.a
+    <Component
       ref={ref}
+      href={href}
       data-cursor-hover
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -61,6 +74,6 @@ export default function MagneticButton({
       {...props}
     >
       {children}
-    </motion.a>
+    </Component>
   );
 }

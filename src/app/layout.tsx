@@ -6,6 +6,7 @@ import GridOverlay from "@/components/GridOverlay";
 import Background3DLoader from "@/components/Background3DLoader";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
+import AppShell from "@/components/AppShell";
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -47,8 +48,8 @@ export default function RootLayout({
         <NoiseOverlay />
         <CustomCursor />
         <ScrollProgress />
-        <div className="relative z-10 flex flex-col min-h-full">
-          {children}
+        <div className="relative z-10 flex min-h-full flex-1 flex-col">
+          <AppShell>{children}</AppShell>
         </div>
       </body>
     </html>

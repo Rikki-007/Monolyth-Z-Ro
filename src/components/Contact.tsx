@@ -50,8 +50,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-anchor relative py-32">
-      <div className="mx-auto max-w-4xl px-6 text-center">
+    <section className="relative px-6 pt-40 pb-32">
+      <div className="mx-auto max-w-4xl text-center">
         <motion.div
           variants={staggerContainer()}
           initial="hidden"
@@ -70,14 +70,14 @@ export default function Contact() {
             04 / Contact
           </motion.span>
 
-          <motion.h2
+          <motion.h1
             variants={fadeUp}
             className="font-display text-5xl text-paper sm:text-7xl"
           >
             Let&apos;s build
             <br />
             <span className="text-glow-cyan text-cyan">something real.</span>
-          </motion.h2>
+          </motion.h1>
 
           <motion.p
             variants={fadeUp}

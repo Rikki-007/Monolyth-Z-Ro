@@ -51,10 +51,9 @@ export default function Hero() {
 
   return (
     <section
-      id="top"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
-      className="section-anchor relative flex h-screen items-center justify-center overflow-hidden"
+      className="relative flex h-screen items-center justify-center overflow-hidden"
     >
       <motion.div
         style={{ opacity: heroOpacity, scale: heroScale, y: heroY }}
@@ -100,13 +99,13 @@ export default function Hero() {
 
           <motion.div variants={fadeUp} className="mt-4 flex gap-4">
             <MagneticButton
-              href="#projects"
+              href="/work"
               className="border-beam rounded-full px-6 py-3 font-mono text-xs uppercase tracking-widest text-amber transition-colors duration-300 hover:text-paper"
             >
               View Work
             </MagneticButton>
             <MagneticButton
-              href="#contact"
+              href="/contact"
               className="glass-premium rounded-full px-6 py-3 font-mono text-xs uppercase tracking-widest text-paper transition-colors duration-300 hover:text-violet"
             >
               Get In Touch

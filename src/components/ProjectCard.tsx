@@ -131,16 +131,18 @@ export default function ProjectCard({
             Visit Site
             <ArrowUpRight size={14} />
           </a>
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-cursor-hover
-            className="inline-flex items-center gap-1.5 text-fog transition-colors duration-300 hover:text-paper"
-          >
-            <GithubIcon size={14} />
-            Code
-          </a>
+          {project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor-hover
+              className="inline-flex items-center gap-1.5 text-fog transition-colors duration-300 hover:text-paper"
+            >
+              <GithubIcon size={14} />
+              Code
+            </a>
+          )}
         </div>
       </div>
     </motion.div>

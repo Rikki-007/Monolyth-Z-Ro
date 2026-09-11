@@ -67,10 +67,6 @@ body {
   background: var(--cyan);
 }
 
-.section-anchor {
-  scroll-margin-top: 96px;
-}
-
 /* ---------- Atmosphere: noise + grid ---------- */
 
 .noise-overlay {
@@ -166,12 +162,15 @@ body {
 .border-beam {
   position: relative;
   isolation: isolate;
-  /* The ::before below repaints continuously (its background is a rotating
-     conic-gradient, which isn't a compositor-only property like transform/
-     opacity) — up to ~7 of these can be on screen at once as cards scroll
-     into view. `contain: paint` tells the browser that repaint never needs
-     to escape this box, so each one stays a strictly local cost instead of
-     risking wider invalidation. */
+  /* The ::before below repaints every animation frame — its background is a
+     rotating conic-gradient, which isn't a compositor-only property like
+     transform/opacity, so the browser has to re-rasterize it. Up to ~7 of
+     these can be on screen at once as cards scroll into view, and doing
+     that continuously (regardless of whether anyone is even looking at a
+     given card) was a real source of scroll-time jank. `contain: paint`
+     keeps whatever repaint does happen strictly local to this box. The
+     animation itself only *runs* on hover/focus (below) — idle and
+     scrolling cost nothing. */
   contain: paint;
 }
 
@@ -198,8 +197,23 @@ body {
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+  opacity: 0.55;
   animation: beam-rotate 4s linear infinite;
+  animation-play-state: paused;
+  transition: opacity 0.4s ease;
   pointer-events: none;
+}
+
+.border-beam:hover::before,
+.border-beam:focus-within::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .border-beam::before {
+    animation: none;
+  }
 }
 
 @keyframes beam-rotate {

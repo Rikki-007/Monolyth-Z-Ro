@@ -9,8 +9,12 @@ import {
   Code2,
   Terminal,
   Cpu,
+  Compass,
+  Repeat,
+  Target,
 } from "lucide-react";
 import { fadeUp, staggerContainer } from "@/lib/motion";
+import PageHeader from "@/components/PageHeader";
 
 const designSkills = [
   { icon: Palette, label: "Brand & Identity" },
@@ -22,6 +26,24 @@ const engineeringSkills = [
   { icon: Code2, label: "Web Architecture" },
   { icon: Terminal, label: "Systems & Tooling" },
   { icon: Cpu, label: "App Engineering" },
+];
+
+const principles = [
+  {
+    icon: Compass,
+    title: "Direction first",
+    body: "Every project starts with what it needs to communicate, not what it should look like. The visual language follows from there.",
+  },
+  {
+    icon: Repeat,
+    title: "Iterate in the open",
+    body: "Design and build happen in the same loop — a layout gets stress-tested against real code and real content early, not bolted together at the end.",
+  },
+  {
+    icon: Target,
+    title: "Ship the whole thing",
+    body: "Polish isn't a separate pass. Performance, accessibility, and motion detail are part of the build from the first commit.",
+  },
 ];
 
 export default function About() {
@@ -37,11 +59,7 @@ export default function About() {
   const engineerX = useTransform(scrollYProgress, [0, 0.5], [40, 0]);
 
   return (
-    <section
-      id="about"
-      ref={sectionRef}
-      className="section-anchor relative overflow-hidden py-32"
-    >
+    <section ref={sectionRef} className="relative overflow-hidden px-6 pt-40 pb-32">
       {/* blur-[80px], not the original 140px: this glow moves continuously
           via scroll-linked `y` for the whole time this section is in view,
           so the browser has to keep a much larger filtered/composited
@@ -54,29 +72,20 @@ export default function About() {
         className="pointer-events-none absolute left-1/2 top-1/3 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-cyan/10 blur-[80px] [transform:translateZ(0)]"
       />
 
-      <div className="relative mx-auto max-w-6xl px-6">
-        <motion.div
-          variants={staggerContainer()}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.4 }}
-          className="mb-20 flex flex-col items-start gap-4"
-        >
-          <motion.span
-            variants={fadeUp}
-            className="font-mono text-xs uppercase tracking-[0.4em] text-amber"
-          >
-            01 / About
-          </motion.span>
-          <motion.h2
-            variants={fadeUp}
-            className="font-display text-5xl text-paper sm:text-7xl"
-          >
-            Two disciplines.
-            <br />
-            <span className="text-outline">One process.</span>
-          </motion.h2>
-        </motion.div>
+      <div className="relative mx-auto max-w-6xl">
+        <div className="mb-20">
+          <PageHeader
+            index="01"
+            label="About"
+            title={
+              <>
+                Two disciplines.
+                <br />
+                <span className="text-outline">One process.</span>
+              </>
+            }
+          />
+        </div>
 
         <div className="grid gap-8 md:grid-cols-2">
           <motion.div
@@ -135,6 +144,28 @@ export default function About() {
             </ul>
           </motion.div>
         </div>
+
+        <motion.div
+          variants={staggerContainer(0.1)}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="mt-8 grid gap-5 sm:grid-cols-3"
+        >
+          {principles.map(({ icon: Icon, title, body }) => (
+            <motion.div
+              key={title}
+              variants={fadeUp}
+              className="glass rounded-3xl p-6"
+            >
+              <Icon size={20} className="text-amber" />
+              <h4 className="mt-4 font-display text-xl text-paper">{title}</h4>
+              <p className="mt-2 font-sans text-sm leading-relaxed text-fog">
+                {body}
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

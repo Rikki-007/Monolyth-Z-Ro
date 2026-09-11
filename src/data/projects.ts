@@ -7,7 +7,8 @@ export type Project = {
   description: string;
   year: string;
   liveUrl: string;
-  githubUrl: string;
+  /** Omitted when the repo isn't public yet — the card just skips the "Code" link. */
+  githubUrl?: string;
 };
 
 export type ComingSoonEntry = {
@@ -64,7 +65,22 @@ export const projects: ProjectEntry[] = [
     liveUrl: "https://rikki-007.github.io/Formula1-Records/",
     githubUrl: "https://github.com/Rikki-007/Formula1-Records",
   },
-  { comingSoon: true, category: "App" },
-  { comingSoon: true, category: "Software" },
+  {
+    title: "Void Arcade",
+    category: "App",
+    description:
+      "A scroll-driven, WebGL-backed arcade: six fully playable browser games behind a persistent, cursor- and scroll-reactive Three.js background.",
+    year: "2026",
+    liveUrl: "https://game-web-two-snowy.vercel.app/",
+    githubUrl: "https://github.com/Rikki-007/game-web",
+  },
+  {
+    title: "Meridian",
+    category: "Software",
+    description:
+      "A simulated paper-trading terminal — live order book, portfolio, and trade execution UI over a cursor- and scroll-reactive 3D instrument background.",
+    year: "2026",
+    liveUrl: "https://my-trading-platform-2.vercel.app/",
+  },
   { comingSoon: true, category: "Design" },
 ];
