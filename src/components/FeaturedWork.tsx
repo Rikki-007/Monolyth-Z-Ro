@@ -3,16 +3,25 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import ProjectCard from "@/components/ProjectCard";
 import { fadeUp } from "@/lib/motion";
 import PageHeader from "@/components/PageHeader";
 
-// Most recent three shipped projects — currently a client site plus the two
-// self-directed apps (Void Arcade, Meridian), which read strongest as a
-// homepage teaser. The full set (including the earlier client work) lives
+// Curated by hand rather than derived (e.g. "last N shipped") so the
+// homepage teaser is a deliberate pick, not whatever happens to be newest —
+// two live client sites plus the two self-directed apps. The full set lives
 // on /work.
-const featured = projects.filter((p) => !p.comingSoon).slice(-3);
+const FEATURED_TITLES = [
+  "Aspect Plumbing & Heating",
+  "Electricians 24/7",
+  "Void Arcade",
+  "Meridian",
+];
+
+const featured = FEATURED_TITLES.map((title) =>
+  projects.find((p): p is Project => !p.comingSoon && p.title === title)
+).filter((p): p is Project => Boolean(p));
 
 export default function FeaturedWork() {
   return (

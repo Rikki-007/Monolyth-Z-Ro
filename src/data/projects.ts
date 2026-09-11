@@ -58,14 +58,6 @@ export const projects: ProjectEntry[] = [
     githubUrl: "https://github.com/Rikki-007/F1-Records-007",
   },
   {
-    title: "Formula1 Records",
-    category: "Web",
-    description: "An archive of Formula 1 records, kept up to date with the latest results.",
-    year: "2026",
-    liveUrl: "https://rikki-007.github.io/Formula1-Records/",
-    githubUrl: "https://github.com/Rikki-007/Formula1-Records",
-  },
-  {
     title: "Void Arcade",
     category: "App",
     description:
