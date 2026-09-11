@@ -28,7 +28,12 @@ export default function FeaturedWork() {
     <section className="relative px-6 py-28">
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-          <PageHeader index="02" label="Work" title="Selected Projects" />
+          <PageHeader
+            index="02"
+            label="Work"
+            title="Selected Projects"
+            reveal="scroll"
+          />
           <motion.div
             variants={fadeUp}
             initial="hidden"

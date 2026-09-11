@@ -52,11 +52,13 @@ export default function Contact() {
   return (
     <section className="relative px-6 pt-40 pb-32">
       <div className="mx-auto max-w-4xl text-center">
+        {/* animate, not whileInView: this whole page is short enough to
+            sit fully in the initial viewport on load — nothing to scroll
+            past to trigger a scroll-based reveal. */}
         <motion.div
           variants={staggerContainer()}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.5 }}
+          animate="show"
           className="flex flex-col items-center gap-6"
         >
           <motion.div variants={fadeUp}>

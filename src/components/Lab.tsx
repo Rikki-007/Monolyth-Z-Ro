@@ -26,10 +26,13 @@ export default function Lab() {
           />
         </div>
 
+        {/* animate, not whileInView: this panel sits directly under the
+            page header, which on most screens is already on screen at
+            load — a scroll-triggered reveal has nothing to scroll past to
+            trigger it. */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }}
-          viewport={{ once: true, amount: 0.2 }}
+          animate={{ opacity: 1, scale: 1, transition: { duration: 1, ease: [0.16, 1, 0.3, 1] } }}
           className="glass-premium border-beam overflow-hidden rounded-3xl"
         >
           <ParticleLabLoader />

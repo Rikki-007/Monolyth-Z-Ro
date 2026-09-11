@@ -42,8 +42,7 @@ export default function Projects() {
           <motion.div
             variants={fadeUp}
             initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.4 }}
+            animate="show"
             className="flex flex-wrap gap-2 font-mono text-xs uppercase tracking-widest"
           >
             {filters.map((filter) => (

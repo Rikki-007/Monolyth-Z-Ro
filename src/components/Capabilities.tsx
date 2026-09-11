@@ -46,6 +46,7 @@ export default function Capabilities() {
             index="01"
             label="Capabilities"
             title="One studio, three disciplines."
+            reveal="scroll"
           />
           <motion.div
             variants={fadeUp}

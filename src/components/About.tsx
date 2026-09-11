@@ -88,11 +88,15 @@ export default function About() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
+          {/* animate, not whileInView, for both cards below and the
+              principles row further down: this content sits close enough
+              to the top of the page (right under the header) that it's
+              often still in the initial viewport on load, where a
+              scroll-triggered reveal has nothing to scroll past to fire. */}
           <motion.div
             style={{ x: designX }}
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1, transition: { duration: 1 } }}
-            viewport={{ once: true, amount: 0.3 }}
+            animate={{ opacity: 1, transition: { duration: 1 } }}
             className="glass-premium border-beam rounded-3xl p-8 [transform:translateZ(0)]"
           >
             <h3 className="font-display text-3xl text-crimson text-glow-crimson">
@@ -119,8 +123,7 @@ export default function About() {
           <motion.div
             style={{ x: engineerX }}
             initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1, transition: { duration: 1 } }}
-            viewport={{ once: true, amount: 0.3 }}
+            animate={{ opacity: 1, transition: { duration: 1 } }}
             className="glass-premium border-beam rounded-3xl p-8 [transform:translateZ(0)]"
           >
             <h3 className="font-display text-3xl text-cyan text-glow-cyan">
@@ -148,8 +151,7 @@ export default function About() {
         <motion.div
           variants={staggerContainer(0.1)}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.3 }}
+          animate="show"
           className="mt-8 grid gap-5 sm:grid-cols-3"
         >
           {principles.map(({ icon: Icon, title, body }) => (
