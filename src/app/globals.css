@@ -221,3 +221,63 @@ body {
     --beam-angle: 360deg;
   }
 }
+
+/* ---------- Showcase-grid style swatches (/showcase) ---------- */
+/* Small, self-contained CSS previews so each of the seven design-style
+   cards actually looks like its own aesthetic rather than just naming it.
+   Scoped under .swatch so none of this leaks into the rest of the site. */
+
+.swatch-neu {
+  background: #e4e7ec;
+}
+.swatch-neu .neu-surface {
+  background: #e4e7ec;
+  box-shadow:
+    8px 8px 16px rgba(163, 170, 183, 0.55),
+    -8px -8px 16px rgba(255, 255, 255, 0.85);
+}
+.swatch-neu .neu-surface-inset {
+  background: #e4e7ec;
+  box-shadow:
+    inset 4px 4px 8px rgba(163, 170, 183, 0.55),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.85);
+}
+
+.swatch-brutal {
+  background: #f2f0e6;
+}
+.swatch-brutal .brutal-block {
+  box-shadow: 6px 6px 0 0 #0a0a0a;
+}
+
+.swatch-liquid {
+  background: radial-gradient(circle at 30% 20%, #4c1d95 0%, #1e0a4d 45%, #06060f 100%);
+}
+.swatch-liquid .liquid-blob {
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.35),
+    rgba(139, 92, 246, 0.25) 40%,
+    rgba(0, 243, 255, 0.2) 100%
+  );
+  backdrop-filter: blur(6px);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    0 8px 30px rgba(0, 0, 0, 0.35);
+  animation: liquid-morph 8s ease-in-out infinite;
+}
+@keyframes liquid-morph {
+  0%,
+  100% {
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  }
+  50% {
+    border-radius: 58% 42% 39% 61% / 55% 60% 40% 45%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .swatch-liquid .liquid-blob {
+    animation: none;
+  }
+}
