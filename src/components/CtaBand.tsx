@@ -36,8 +36,10 @@ export default function CtaBand() {
           variants={fadeUp}
           className="relative max-w-md font-sans text-sm text-fog sm:text-base"
         >
-          Open to freelance work, collaborations, and full-time roles
-          spanning design and engineering.
+          Whichever aesthetic your project calls for, it&apos;s built by the
+          same studio, to the same standard — open to freelance work,
+          collaborations, and full-time roles spanning design and
+          engineering.
         </motion.p>
         <motion.div variants={fadeUp} className="relative mt-2">
           <MagneticButton

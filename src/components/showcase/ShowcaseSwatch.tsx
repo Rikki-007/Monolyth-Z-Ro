@@ -54,7 +54,7 @@ export default function ShowcaseSwatch({ id }: { id: string }) {
         </div>
       );
 
-    case "brutalism":
+    case "neo-brutalism":
       return (
         <div className="swatch-brutal relative flex h-full w-full flex-col justify-between p-5">
           <div className="brutal-block flex w-fit items-center border-2 border-black bg-[#ff3b30] px-3 py-1 font-mono text-xs font-bold uppercase tracking-widest text-black">

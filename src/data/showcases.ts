@@ -49,8 +49,8 @@ export const showcases: Showcase[] = [
     stack: ["Tailwind CSS", "GSAP", "SVG Filters"],
   },
   {
-    id: "brutalism",
-    title: "Brutalism",
+    id: "neo-brutalism",
+    title: "Neo-Brutalism",
     tagline: "Raw structure, zero apology",
     description:
       "Hard edges, stacked monospace type, and shadows with no blur — structure exposed instead of styled over. Best for developer tools, manifestos, and portfolios that want to read as unmistakably handmade and confident.",

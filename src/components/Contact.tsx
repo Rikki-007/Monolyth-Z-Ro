@@ -65,6 +65,19 @@ export default function Contact() {
             <Wordmark iconSize={34} textClassName="text-xl sm:text-2xl" />
           </motion.div>
 
+          <motion.div
+            variants={fadeUp}
+            className="glass inline-flex items-center gap-2 rounded-full border border-concrete-line px-4 py-1.5"
+          >
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-60" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
+            </span>
+            <span className="font-mono text-[11px] uppercase tracking-widest text-fog">
+              Available for new projects
+            </span>
+          </motion.div>
+
           <motion.span
             variants={fadeUp}
             className="font-mono text-xs uppercase tracking-[0.4em] text-amber"
@@ -86,47 +99,57 @@ export default function Contact() {
             className="max-w-md font-sans text-sm text-fog sm:text-base"
           >
             Open to freelance work, collaborations, and full-time roles
-            spanning design and engineering.
+            spanning design and engineering. Typically replies within 24
+            hours.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-4">
+          <motion.div variants={fadeUp} className="mt-6">
             <MagneticButton
               href={`mailto:${email}`}
               onClick={handleEmailClick}
               aria-label={`Send an email to ${email}`}
-              className="glass-premium flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm tracking-widest text-cyan transition-all duration-300 hover:border-violet/40 hover:glow-violet"
+              className="border-beam glass-premium flex items-center gap-3 rounded-full px-8 py-4 font-mono text-sm tracking-widest text-cyan transition-all duration-300 hover:border-violet/40 hover:glow-violet"
             >
               {copied ? <Check size={18} /> : <Mail size={18} />}
               {copied ? "Copied — paste into your mail app" : email}
             </MagneticButton>
           </motion.div>
 
-          <motion.div variants={fadeUp}>
+          {/* Secondary channels grouped into one bordered panel, visually
+              subordinate to the primary email CTA above — a phone number
+              and five social links reading as a flat row of equal-weight
+              buttons was competing with the actual conversion action. */}
+          <motion.div
+            variants={fadeUp}
+            className="glass mt-4 flex w-full max-w-md flex-col items-center gap-5 rounded-3xl border border-concrete-line px-6 py-6"
+          >
             <MagneticButton
               href="tel:+353896139970"
               aria-label="Call +353 0896139970"
-              className="glass flex items-center gap-3 rounded-full border border-concrete-line px-8 py-4 font-mono text-sm uppercase tracking-widest text-cyan transition-all duration-300 hover:border-cyan/50 hover:glow-cyan"
+              className="flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-paper transition-colors duration-300 hover:text-cyan"
             >
-              <Phone size={18} />
+              <Phone size={16} />
               +353 0896139970
             </MagneticButton>
-          </motion.div>
 
-          <motion.div variants={fadeUp} className="mt-8 flex gap-6">
-            {socials.map(({ icon: Icon, label, href }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${label} (opens in a new tab)`}
-                title={label}
-                data-cursor-hover
-                className="glass flex h-11 w-11 items-center justify-center rounded-full border border-concrete-line text-fog transition-all duration-300 hover:border-cyan/50 hover:text-cyan hover:glow-cyan"
-              >
-                <Icon size={18} />
-              </a>
-            ))}
+            <div className="h-px w-full bg-concrete-line" />
+
+            <div className="flex gap-4">
+              {socials.map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${label} (opens in a new tab)`}
+                  title={label}
+                  data-cursor-hover
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-concrete-line text-fog transition-all duration-300 hover:border-cyan/50 hover:text-cyan hover:glow-cyan"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
           </motion.div>
         </motion.div>
       </div>
