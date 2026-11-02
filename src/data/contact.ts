@@ -2,7 +2,7 @@
 // phone number or social link (contact page, structured data) reads from
 // here, so the site can never advertise two different numbers again.
 export const contact = {
-  email: "hello@monolythzro.com",
+  email: "monolythzro@gmail.com",
   phone: {
     display: "+353 89 613 9970",
     href: "tel:+353896139970",
