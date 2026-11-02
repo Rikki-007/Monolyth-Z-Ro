@@ -3,6 +3,7 @@ type IconProps = { size?: number; className?: string };
 export function GithubIcon({ size = 18, className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -18,29 +19,10 @@ export function GithubIcon({ size = 18, className }: IconProps) {
   );
 }
 
-export function LinkedinIcon({ size = 18, className }: IconProps) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-    >
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v1.5A5.98 5.98 0 0 1 16 8z" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
-
 export function InstagramIcon({ size = 18, className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -61,6 +43,7 @@ export function InstagramIcon({ size = 18, className }: IconProps) {
 export function FacebookIcon({ size = 18, className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"
@@ -79,6 +62,7 @@ export function FacebookIcon({ size = 18, className }: IconProps) {
 export function WhatsappIcon({ size = 18, className }: IconProps) {
   return (
     <svg
+      aria-hidden="true"
       width={size}
       height={size}
       viewBox="0 0 24 24"

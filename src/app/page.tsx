@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Hero from "@/components/Hero";
 import ServicesMatrix from "@/components/showcase/ServicesMatrix";
 import ShowcaseGrid from "@/components/showcase/ShowcaseGrid";
@@ -9,6 +10,10 @@ import CtaBand from "@/components/CtaBand";
 // visitor never has to click through to see the scope of what this studio
 // builds. /showcase and /work still exist as their own routes (linked from
 // nav) for anyone who wants a focused, shareable link to either.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
 export default function Home() {
   return (
     <>

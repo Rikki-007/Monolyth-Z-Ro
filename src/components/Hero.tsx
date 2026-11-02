@@ -72,22 +72,22 @@ export default function Hero() {
             DESIGN | ENGINEERING | SOFTWARE
           </motion.span>
 
-          <div className="relative flex flex-col items-center leading-none">
-            <motion.h1
+          <h1 className="relative flex flex-col items-center leading-none">
+            <motion.span
               variants={fadeUp}
               style={{ x: designX, y: designY }}
-              className="font-display text-[15vw] text-glow-crimson text-crimson sm:text-[10vw]"
+              className="block font-display text-[15vw] text-glow-crimson text-crimson sm:text-[10vw]"
             >
               DESIGN
-            </motion.h1>
-            <motion.h1
+            </motion.span>{" "}
+            <motion.span
               variants={fadeUp}
               style={{ x: engineerX, y: engineerY }}
-              className="font-display -mt-[3vw] text-[15vw] text-glow-cyan text-cyan sm:-mt-[2vw] sm:text-[10vw]"
+              className="block font-display -mt-[3vw] text-[15vw] text-glow-cyan text-cyan sm:-mt-[2vw] sm:text-[10vw]"
             >
               ENGINEER
-            </motion.h1>
-          </div>
+            </motion.span>
+          </h1>
 
           <motion.p
             variants={fadeUp}
@@ -117,6 +117,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, transition: { delay: 1.4, duration: 1, ease: cinematicEase } }}
+        aria-hidden="true"
         className="absolute bottom-10 flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-widest text-fog"
       >
         <span>Scroll</span>

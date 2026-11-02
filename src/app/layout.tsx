@@ -7,6 +7,11 @@ import Background3DLoader from "@/components/Background3DLoader";
 import CustomCursor from "@/components/CustomCursor";
 import ScrollProgress from "@/components/ScrollProgress";
 import AppShell from "@/components/AppShell";
+import { contact } from "@/data/contact";
+
+const siteUrl = "https://www.monolythzro.com";
+const description =
+  "MONOLYTH Z-RO is a digital design and engineering studio: brand, interface and software, built to one standard from first concept to shipped product.";
 
 const bebas = Bebas_Neue({
   variable: "--font-bebas",
@@ -26,10 +31,38 @@ const jetbrains = JetBrains_Mono({
   weight: ["400", "500"],
 });
 
+// Canonical URLs are set per page: a canonical here would be inherited by
+// every route and point them all at the homepage.
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "MONOLYTH Z-RO — Design | Engineering | Software",
-  description:
-    "MONOLYTH Z-RO — a design, engineering, and software studio.",
+  description,
+  applicationName: "MONOLYTH Z-RO",
+  openGraph: {
+    type: "website",
+    siteName: "MONOLYTH Z-RO",
+    title: "MONOLYTH Z-RO — Digital Design & Engineering Studio",
+    description,
+    locale: "en_IE",
+  },
+  twitter: {
+    card: "summary",
+    title: "MONOLYTH Z-RO — Digital Design & Engineering Studio",
+    description,
+  },
+};
+
+// Tells crawlers who the studio is: the exact brand name and the one set of
+// contact details the site publishes.
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "MONOLYTH Z-RO",
+  url: siteUrl,
+  email: contact.email,
+  telephone: contact.phone.href.replace("tel:", ""),
+  description,
+  sameAs: [contact.github, contact.instagram, contact.facebook],
 };
 
 export default function RootLayout({
@@ -43,6 +76,12 @@ export default function RootLayout({
       className={`${bebas.variable} ${grotesk.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-obsidian text-paper">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <GridOverlay />
         <Background3DLoader />
         <NoiseOverlay />

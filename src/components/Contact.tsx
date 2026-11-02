@@ -5,35 +5,24 @@ import { motion } from "framer-motion";
 import { Check, Mail, Phone } from "lucide-react";
 import {
   GithubIcon,
-  LinkedinIcon,
   InstagramIcon,
   FacebookIcon,
   WhatsappIcon,
 } from "@/components/icons/BrandIcons";
 import { Wordmark } from "@/components/icons/MonolythMark";
+import { contact } from "@/data/contact";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import MagneticButton from "@/components/MagneticButton";
+import BriefConfigurator from "@/components/BriefConfigurator";
 
-const email = "monolythzro@gmail.com";
+const { email, phone } = contact;
 
+// LinkedIn is deliberately absent until the studio has its own page there.
 const socials = [
-  { icon: GithubIcon, label: "GitHub", href: "https://github.com/Rikki-007" },
-  { icon: LinkedinIcon, label: "LinkedIn", href: "https://linkedin.com/" },
-  {
-    icon: InstagramIcon,
-    label: "Instagram",
-    href: "https://www.instagram.com/monolyth_zro?igsh=d2NocDhsdXhiYTZ1&utm_source=qr",
-  },
-  {
-    icon: FacebookIcon,
-    label: "Facebook",
-    href: "https://www.facebook.com/share/19567ukrr5/?mibextid=wwXIfr",
-  },
-  {
-    icon: WhatsappIcon,
-    label: "WhatsApp",
-    href: "https://wa.me/353899698237",
-  },
+  { icon: GithubIcon, label: "GitHub", href: contact.github },
+  { icon: InstagramIcon, label: "Instagram", href: contact.instagram },
+  { icon: FacebookIcon, label: "Facebook", href: contact.facebook },
+  { icon: WhatsappIcon, label: `WhatsApp ${phone.display}`, href: contact.whatsapp },
 ];
 
 export default function Contact() {
@@ -69,7 +58,7 @@ export default function Contact() {
             variants={fadeUp}
             className="glass inline-flex items-center gap-2 rounded-full border border-concrete-line px-4 py-1.5"
           >
-            <span className="relative flex h-2 w-2">
+            <span aria-hidden="true" className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan" />
             </span>
@@ -98,9 +87,8 @@ export default function Contact() {
             variants={fadeUp}
             className="max-w-md font-sans text-sm text-fog sm:text-base"
           >
-            Open to freelance work, collaborations, and full-time roles
-            spanning design and engineering. Typically replies within 24
-            hours.
+            Design and engineering engagements, from first concept to
+            shipped product. Typically replies within 24 hours.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-6">
@@ -124,12 +112,12 @@ export default function Contact() {
             className="glass mt-4 flex w-full max-w-md flex-col items-center gap-5 rounded-3xl border border-concrete-line px-6 py-6"
           >
             <MagneticButton
-              href="tel:+353896139970"
-              aria-label="Call +353 0896139970"
+              href={phone.href}
+              aria-label={`Call ${phone.display}`}
               className="flex items-center gap-3 font-mono text-sm uppercase tracking-widest text-paper transition-colors duration-300 hover:text-cyan"
             >
               <Phone size={16} />
-              +353 0896139970
+              {phone.display}
             </MagneticButton>
 
             <div className="h-px w-full bg-concrete-line" />
@@ -150,6 +138,10 @@ export default function Contact() {
                 </a>
               ))}
             </div>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="flex w-full justify-center">
+            <BriefConfigurator />
           </motion.div>
         </motion.div>
       </div>

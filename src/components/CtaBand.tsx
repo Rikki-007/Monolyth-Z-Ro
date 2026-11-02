@@ -37,9 +37,8 @@ export default function CtaBand() {
           className="relative max-w-md font-sans text-sm text-fog sm:text-base"
         >
           Whichever aesthetic your project calls for, it&apos;s built by the
-          same studio, to the same standard — open to freelance work,
-          collaborations, and full-time roles spanning design and
-          engineering.
+          same studio, to the same standard — design and engineering under
+          one roof, from first concept to shipped product.
         </motion.p>
         <motion.div variants={fadeUp} className="relative mt-2">
           <MagneticButton

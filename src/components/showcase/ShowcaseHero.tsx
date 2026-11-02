@@ -46,7 +46,7 @@ export default function ShowcaseHero() {
           MONOLYTH Z-RO is built to move fluently between aesthetics — from
           soft neumorphic calm to raw brutalist noise — without losing
           performance, accessibility, or craft along the way. Below: seven
-          interaction languages, each headed for its own live showcase.
+          interaction languages, each shipped as its own live build.
         </motion.p>
 
         <motion.div variants={fadeUp} className="mt-2 flex flex-wrap justify-center gap-4">

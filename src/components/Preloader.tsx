@@ -65,18 +65,19 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
     <AnimatePresence>
       {!done && (
         <motion.div
+          aria-hidden="true"
           className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-obsidian"
           exit={{
             opacity: 0,
             transition: { duration: 0.8, ease: cinematicEase, delay: 0.3 },
           }}
         >
-          <div className="grid-overlay" aria-hidden="true" />
+          <div className="grid-overlay" />
 
           <div className="relative flex flex-col items-center gap-2">
             {words.map((word, i) => (
               <div key={word} className="overflow-hidden">
-                <motion.h1
+                <motion.div
                   custom={i}
                   variants={lineVariants}
                   initial="hidden"
@@ -87,7 +88,7 @@ export default function Preloader({ onComplete }: { onComplete: () => void }) {
                   }`}
                 >
                   {word}
-                </motion.h1>
+                </motion.div>
               </div>
             ))}
           </div>

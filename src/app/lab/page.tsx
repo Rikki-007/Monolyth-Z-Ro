@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Lab from "@/components/Lab";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/lab" },
   title: "Lab — MONOLYTH Z-RO",
   description: "An interactive WebGL particle sandbox — MONOLYTH Z-RO.",
 };

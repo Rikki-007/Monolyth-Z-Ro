@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowUpRight, Clock } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/icons/BrandIcons";
-import type { Showcase } from "@/data/showcases";
+import { tiers, type Showcase } from "@/data/showcases";
 import { cinematicEase } from "@/lib/motion";
 import ShowcaseSwatch from "@/components/showcase/ShowcaseSwatch";
 
@@ -11,7 +11,7 @@ export default function ShowcaseCard({
   showcase,
   index,
 }: {
-  showcase: Showcase;
+  showcase: Showcase & { liveUrl: string };
   index: number;
 }) {
   return (
@@ -24,11 +24,10 @@ export default function ShowcaseCard({
       }}
       className="border-beam group flex flex-col overflow-hidden rounded-3xl transition-transform duration-500 hover:-translate-y-1.5"
     >
-      <div className="relative h-44 overflow-hidden sm:h-48">
+      <div aria-hidden="true" className="relative h-44 overflow-hidden sm:h-48">
         <ShowcaseSwatch id={showcase.id} />
         {/* Diagonal light sweep on hover — cheap, transform-only micro-interaction */}
         <div
-          aria-hidden="true"
           className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/15 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
         />
       </div>
@@ -41,6 +40,9 @@ export default function ShowcaseCard({
           <h3 className="mt-2 font-display text-2xl text-paper sm:text-3xl">
             {showcase.title}
           </h3>
+          <span className="mt-2 inline-block rounded-full border border-concrete-line px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-widest text-fog">
+            {tiers[showcase.tier]}
+          </span>
         </div>
 
         <p className="font-sans text-sm leading-relaxed text-fog">
@@ -59,26 +61,17 @@ export default function ShowcaseCard({
         </div>
 
         <div className="mt-auto flex items-center gap-5 pt-2 font-mono text-xs uppercase tracking-widest">
-          {showcase.liveUrl ? (
-            <a
-              href={showcase.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-cursor-hover
-              className="inline-flex items-center gap-1.5 text-cyan transition-colors duration-300 hover:text-paper"
-            >
-              Visit Showcase
-              <ArrowUpRight size={14} />
-            </a>
-          ) : (
-            <span
-              className="inline-flex items-center gap-1.5 text-fog/60"
-              title="This showcase hasn't shipped its own deployment yet"
-            >
-              <Clock size={13} />
-              In Development
-            </span>
-          )}
+          <a
+            href={showcase.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor-hover
+            aria-label={`Visit ${showcase.project ?? showcase.title} (opens in a new tab)`}
+            className="inline-flex items-center gap-1.5 text-cyan transition-colors duration-300 hover:text-paper"
+          >
+            Visit {showcase.project ?? "Showcase"}
+            <ArrowUpRight size={14} />
+          </a>
           {showcase.githubUrl && (
             <a
               href={showcase.githubUrl}
@@ -89,6 +82,7 @@ export default function ShowcaseCard({
             >
               <GithubIcon size={14} />
               Code
+              <span className="sr-only">for {showcase.project ?? showcase.title} (opens in a new tab)</span>
             </a>
           )}
         </div>

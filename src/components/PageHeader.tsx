@@ -22,6 +22,9 @@ import { fadeUp, staggerContainer } from "@/lib/motion";
  * `reveal="scroll"` for placements genuinely below the fold (e.g. the
  * homepage's Capabilities/FeaturedWork sections beneath the full-height
  * Hero), where that scroll event is guaranteed.
+ *
+ * `as="h2"` for any placement under another page's own <h1> (sections on
+ * Home and /showcase), so every page keeps exactly one <h1>.
  */
 export default function PageHeader({
   index,
@@ -30,6 +33,7 @@ export default function PageHeader({
   description,
   align = "left",
   reveal = "mount",
+  as = "h1",
 }: {
   index: string;
   label: string;
@@ -37,7 +41,9 @@ export default function PageHeader({
   description?: React.ReactNode;
   align?: "left" | "center";
   reveal?: "mount" | "scroll";
+  as?: "h1" | "h2";
 }) {
+  const Heading = as === "h2" ? motion.h2 : motion.h1;
   const revealProps =
     reveal === "mount"
       ? { initial: "hidden" as const, animate: "show" as const }
@@ -61,12 +67,12 @@ export default function PageHeader({
       >
         {index} / {label}
       </motion.span>
-      <motion.h1
+      <Heading
         variants={fadeUp}
         className="font-display text-5xl text-paper sm:text-7xl"
       >
         {title}
-      </motion.h1>
+      </Heading>
       {description && (
         <motion.p
           variants={fadeUp}

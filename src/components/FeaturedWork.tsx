@@ -29,6 +29,7 @@ export default function FeaturedWork() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
           <PageHeader
+            as="h2"
             index="03"
             label="Work"
             title="Selected Projects"

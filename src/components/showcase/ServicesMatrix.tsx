@@ -63,6 +63,7 @@ export default function ServicesMatrix() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-14">
           <PageHeader
+            as="h2"
             index="01"
             label="Capabilities"
             title="Services Matrix"

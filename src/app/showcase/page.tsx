@@ -5,6 +5,7 @@ import ShowcaseGrid from "@/components/showcase/ShowcaseGrid";
 import CtaBand from "@/components/CtaBand";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/showcase" },
   title: "Showcase — MONOLYTH Z-RO",
   description:
     "Capabilities and services matrix, plus seven interaction-language showcases — MONOLYTH Z-RO.",

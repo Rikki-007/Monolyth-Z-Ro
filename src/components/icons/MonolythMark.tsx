@@ -62,7 +62,9 @@ export function Wordmark({
 
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>
+      <span className="sr-only">MONOLYTH Z-RO</span>
       <span
+        aria-hidden="true"
         className={`font-sans font-bold uppercase leading-none tracking-tighter text-paper ${textClassName}`}
       >
         MONOLYTH{" "}
