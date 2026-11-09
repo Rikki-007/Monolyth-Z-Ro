@@ -222,6 +222,33 @@ body {
   }
 }
 
+/* ---------- Route entrance (RouteTransition) ---------- */
+/* Pure CSS on purpose: a keyframe with fill-mode `both` always lands on its
+   final, fully visible frame — there's no JS completion step that can be
+   dropped mid-navigation and strand the page at opacity 0. No `transform`
+   in the end state, so it doesn't create a containing block for the fixed
+   elements inside pages once the animation is over. */
+@keyframes route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.route-enter {
+  animation: route-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-enter {
+    animation: none;
+  }
+}
+
 /* ---------- Showcase-grid style swatches (/showcase) ---------- */
 /* Small, self-contained CSS previews so each of the seven design-style
    cards actually looks like its own aesthetic rather than just naming it.
